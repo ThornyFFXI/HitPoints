@@ -153,16 +153,18 @@ engaged.DrawWindow = function()
 
 					imgui.Separator();
 					
-					-- Create a clickable area for the entire target entry (after all content is drawn)
-					local entryHeight = yDist + engagedSettings.bgPadding;
-					-- Use InvisibleButton positioned exactly over the background area
-					imgui.SetCursorScreenPos({winX + cornerOffset, winY + cornerOffset});
-					if imgui.InvisibleButton('TargetEntry'..k, {rectLength - cornerOffset, entryHeight}) then
-						-- Handle click - target this entity
-						local serverId = AshitaCore:GetMemoryManager():GetEntity():GetServerId(k);
-						local decimalId = tonumber(serverId);
-						if decimalId and decimalId > 0 then
-							AshitaCore:GetChatManager():QueueCommand(-1, '/target ' .. decimalId);
+					if not gShowConfig[1] then
+						-- Create a clickable area for the entire target entry (after all content is drawn)
+						local entryHeight = yDist + engagedSettings.bgPadding;
+						-- Use InvisibleButton positioned exactly over the background area
+						imgui.SetCursorScreenPos({winX + cornerOffset, winY + cornerOffset});
+						if imgui.InvisibleButton('TargetEntry'..k, {rectLength - cornerOffset, entryHeight}) then
+							-- Handle click - target this entity
+							local serverId = AshitaCore:GetMemoryManager():GetEntity():GetServerId(k);
+							local decimalId = tonumber(serverId);
+							if decimalId and decimalId > 0 then
+								AshitaCore:GetChatManager():QueueCommand(-1, '/target ' .. decimalId);
+							end
 						end
 					end
 
