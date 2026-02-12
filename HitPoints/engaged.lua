@@ -58,7 +58,8 @@ engaged.DrawWindow = function()
 		windowFlags = bit.bor(windowFlags, ImGuiWindowFlags_NoMove);
 	end
 	if (imgui.Begin('HitPoints - Engaged', true, windowFlags)) then
-		imgui.PushFont(nil, engagedSettings.textScale);
+		local fontSize = imgui.GetFontSize();
+		imgui.PushFont(nil, fontSize * engagedSettings.textScale);
 		local winStartX, _ = imgui.GetWindowPos();
 		local playerTarget = AshitaCore:GetMemoryManager():GetTarget();
 		local targetIndex;
